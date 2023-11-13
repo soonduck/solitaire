@@ -1,0 +1,33 @@
+
+/*layout*/
+
+.container, .wrap-game{
+    height: 100%;
+}
+.wrap-game{
+    width: 820px;
+    margin: 0 auto;
+}
+.wrap-main{
+    height: calc(100% - 44px)
+}
+
+
+/*header*/
+
+.wrap-header{
+    height: 44px;
+    padding: 0 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #911c33;
+    color: #fff;
+}
+
+
+/*main*/
+
+.wrap-main{
+    background: #ebe6e7;
+}
