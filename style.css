@@ -40,7 +40,7 @@
 }
 .wrap-left, .wrap-right{
     background: #ded5d6;
-    width: 110px;
+    width: 100px;
     height: 100%;
 }
 div[class^=center-area], .three-cards{
@@ -107,17 +107,3 @@ div[class^=center-area] img,
 .three-cards img{
     position: absolute;
 }
-
-.three-cards img:nth-child(2){
-    top: 17px;
-    z-index: 1;
-}
-.three-cards img:nth-child(3){
-    top: 34px;
-    z-index: 2;
-}
-
-
-/*div[class^=center-area] img:nth-child(2){*/
-/*    top: 17px*/
-/*}*/
