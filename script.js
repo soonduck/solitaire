@@ -18,7 +18,6 @@ const area = {
 };
 
 // 전체 덱
-
 // prettier-ignore
 let deck = [
   'SA', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'SJ', 'SQ', 'SK',
@@ -48,6 +47,18 @@ const findImg = (card) => {
   return "img/" + card + ".svg";
 };
 
+const checkCards = (card1, card2) => {
+  if (parseColor(card1[0]) === parseColor(card2[0])) return false;
+  const card1Num = cardNum.indexOf(card1.slice(1));
+  const card2Num = cardNum.indexOf(card2.slice(1));
+  return card2Num - card1Num === 1;
+};
+
+const parseColor = (card) => {
+  if (card === "H" || card === "D") return "R";
+  if (card === "S" || card === "C") return "B";
+};
+
 // deck 카드를 다른 변수(덱)에 넣어주는 함수
 const spreadCards = () => {
   // area
@@ -68,13 +79,15 @@ const shuffleDeck = (target) => {
   }
 };
 
+// 이벤트
+
 const drawThreeCards = () => {
   if (!leftDeck.length) {
     leftDeck = openLeftDeck;
     openLeftDeck = [];
     shuffleDeck(leftDeck); // left deck shuffle
   } else openLeftDeck = [...openLeftDeck, ...leftDeck.splice(0, 3)];
-  console.log(openLeftDeck);
+  renderThreeCards();
 };
 
 // 카드 렌더 함수
@@ -106,6 +119,31 @@ const renderAreas = (...areaIdx) => {
   for (let i = 0; i < areaIdx.length; i++) {
     renderArea(areaIdx[i]);
   }
+};
+
+const renderThreeCards = () => {
+  const $deck = document.querySelector(".deck");
+
+  if (!openLeftDeck.length && leftDeck.length)
+    $deck.src = "img/backward_orange.svg";
+
+  const length = openLeftDeck.length < 3 ? 0 : openLeftDeck.length - 3;
+  const temp = openLeftDeck.slice(length); // 마지막 3 카드
+
+  let gap = 0;
+  let zIndex = 1;
+  const $threeCards = document.querySelector(".three-cards");
+  $threeCards.innerHTML = "";
+  for (const card of temp) {
+    const $img = document.createElement("img");
+    $img.src = findImg(card);
+    $img.style.top = gap + "px";
+    $img.style.zIndex = `${zIndex++}`;
+    gap += 17;
+    $threeCards.appendChild($img);
+  }
+
+  if (!leftDeck.length) $deck.src = "img/empty_card_refresh.svg";
 };
 
 // 렌더
